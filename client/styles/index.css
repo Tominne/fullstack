@@ -1,0 +1,52 @@
+html,
+body {
+  background-color: #faf8f1;
+  color: #0a1520;
+  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+.title,
+.nav {
+  text-align: center;
+}
+
+#app {
+  height: 100vh;
+}
+.appContainer {
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-top: 100px;
+}
+.image-placeholder {
+  font-weight: 900;
+  border-radius: 75px;
+  border-color: chocolate;
+}
+
+.formContainer {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+}
+.recipe-list,
+.recipe-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 100px;
+}
+
+#link {
+  text-decoration-line: none;
+}
+
+p {
+  font-size: larger;
+}
