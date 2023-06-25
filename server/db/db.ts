@@ -1,56 +1,52 @@
 import db from './connection'
-import { Recipe, RecipeData } from '../../models/recipe'
+import { Meme, MemeData } from '../../models/meme'
 
-export async function getAllRecipes(): Promise<Recipe[]> {
-  const recipe = await db<Recipe>('recipes').select(
-    'recipes.id',
-    'recipe_name as recipeName',
-    'recipe_type as recipeType'
+export async function getAllMemes(): Promise<Meme[]> {
+  const meme = await db<Meme>('memes').select(
+    'memes.id',
+    'meme_name as memeName',
+    'meme_url as memeUrl'
   )
-  return recipe
+  return meme
 }
 
-export async function getRecipeById(recipeId: number): Promise<Recipe> {
-  const recipe = await db('recipes')
-    .where('recipes.id', recipeId)
-    .select(
-      'recipes.id',
-      'recipe_name as recipeName',
-      'recipe_type as recipeType'
-    )
+export async function getMemeById(memeId: number): Promise<Meme> {
+  const meme = await db('memes')
+    .where('memes.id', memeId)
+    .select('memes.id', 'meme_name as memeName', 'meme_url as memeUrl')
     .first()
-  return recipe
+  return meme
 }
 
-export async function addRecipe(newRecipe: RecipeData): Promise<Recipe> {
-  const [recipe] = await db('recipes')
+export async function addMeme(newMeme: MemeData): Promise<Meme> {
+  const [meme] = await db('memes')
     .insert({
-      recipe_name: newRecipe.recipeName,
-      recipe_type: newRecipe.recipeType,
+      meme_name: newMeme.memeName,
+      meme_url: newMeme.memeUrl,
     })
     .returning('*')
 
-  return recipe
+  return meme
 }
 
-export async function deleteRecipe(recipeId: number): Promise<void> {
-  await db('recipes').where('recipes.id', recipeId).del()
+export async function deleteMeme(memeId: number): Promise<void> {
+  await db('memes').where('memes.id', memeId).del()
 }
 
-export async function updateRecipe(
+export async function updateMeme(
   id: number,
-  recipeName: string,
-  recipeType: string
-): Promise<Recipe | undefined> {
-  const [updatedRecipe] = await db('recipes')
+  memeName: string,
+  memeUrl: string
+): Promise<Meme | undefined> {
+  const [updatedMeme] = await db('memes')
     .where({
       id,
     })
     .update({
-      recipe_name: recipeName,
-      recipe_type: recipeType,
+      Meme_name: memeName,
+      meme_url: memeUrl,
     })
-    .returning(['recipe_name', 'recipe_type'])
+    .returning(['meme_name', 'meme_url'])
 
-  return updatedRecipe
+  return updatedMeme
 }

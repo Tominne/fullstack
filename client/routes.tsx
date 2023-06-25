@@ -1,13 +1,13 @@
 import { Route, createRoutesFromElements } from 'react-router-dom'
 
 import AppLayout from './components/AppLayout'
-import RecipeList from './components/RecipeList'
-import RecipeDetails from './components/RecipeDetails'
+import MemeList from './components/MemeList'
+import MemeDetails from './components/MemeDetails'
 
 export const routes = createRoutesFromElements(
   <Route path="/" element={<AppLayout />}>
-    <Route index element={<RecipeList />} />
+    <Route index element={<MemeList />} />
 
-    <Route path=":recipeId" element={<RecipeDetails />} />
+    <Route path=":memeId" element={<MemeDetails />} />
   </Route>
 )

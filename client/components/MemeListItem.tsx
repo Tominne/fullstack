@@ -1,60 +1,56 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
-import { deleteRecipe, updateRecipe } from '../apis/recipe'
+import { deletememe, updatememe } from '../apis/memes'
 
 interface Props {
-  recipeId: number
-  recipeName: string
-  recipeType: string
+  memeId: number
+  memeName: string
+  memeUrl: string
 }
 
-export default function RecipeListItem({
-  recipeId,
-  recipeName,
-  recipeType,
-}: Props) {
+export default function MemeListItem({ memeId, memeName, memeUrl }: Props) {
   const [updating, setUpdating] = useState(false)
-  const [rename, setRename] = useState(recipeName)
-  const [retype, setRetype] = useState(recipeType)
+  const [rename, setRename] = useState(memeName)
+  const [reUrl, setReUrl] = useState(memeUrl)
 
   const queryClient = useQueryClient()
 
-  const deleteRecipeMutation = useMutation(deleteRecipe, {
+  const deletememeMutation = useMutation(deletememe, {
     onSuccess: async () => {
-      queryClient.invalidateQueries(['recipes'])
+      queryClient.invalidateQueries(['memes'])
     },
   })
 
   const handleDeleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    deleteRecipeMutation.mutate({ recipeId })
-    console.log('deleting', recipeId)
+    deletememeMutation.mutate({ memeId })
+    console.log('deleting', memeId)
   }
 
-  const updateRecipeMutation = useMutation(updateRecipe, {
+  const updatememeMutation = useMutation(updatememe, {
     onSuccess: async () => {
-      queryClient.invalidateQueries(['recipes'])
+      queryClient.invalidateQueries(['memes'])
     },
   })
 
   const handleUpdateSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    updateRecipeMutation.mutate({
-      recipeId,
-      newRecipeName: rename,
-      newRecipeType: retype,
+    updatememeMutation.mutate({
+      memeId,
+      newmemeName: rename,
+      newmemeUrl: reUrl,
     })
 
-    console.log('submitting', rename, retype)
+    console.log('submitting', rename, reUrl)
 
     setUpdating(false)
   }
 
   const handleStopUpdatingClick = () => {
     setUpdating(false)
-    setRename(recipeName)
-    setRetype(recipeType)
+    setRename(memeName)
+    setReUrl(memeUrl)
   }
 
   const handleStartUpdatingClick = () => {
@@ -65,23 +61,23 @@ export default function RecipeListItem({
     <>
       <div>
         {updating ? (
-          <form onSubmit={handleUpdateSubmit} aria-label="Update Recipe Form">
-            <label htmlFor="recipeName">Rename: </label>
+          <form onSubmit={handleUpdateSubmit} aria-label="Update meme Form">
+            <label htmlFor="memeName">Rename: </label>
             <input
               type="text"
-              name="recipeName"
-              id="recipeName"
+              name="memeName"
+              id="memeName"
               value={rename}
               onChange={(e) => setRename(e.target.value)}
             />
 
-            <label htmlFor="recipeType">Type: </label>
+            <label htmlFor="memeUrl">Url: </label>
             <input
               type="text"
-              name="recipeType"
-              id="recipeType"
-              value={retype}
-              onChange={(e) => setRetype(e.target.value)}
+              name="memeUrl"
+              id="memeUrl"
+              value={reUrl}
+              onChange={(e) => setReUrl(e.target.value)}
             />
             <button type="submit">Save</button>
             <button type="button" onClick={handleStopUpdatingClick}>

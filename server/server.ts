@@ -1,6 +1,6 @@
 import express from 'express'
 import path from 'path'
-import recipeRoutes from './routes/recipe'
+import memeRoutes from './routes/meme'
 
 const server = express()
 
@@ -8,7 +8,7 @@ const server = express()
 server.use(express.json())
 
 // Routes
-server.use('/api/v1/recipe', recipeRoutes)
+server.use('/api/v1/meme', memeRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use('/assets', express.static(path.resolve(__dirname, '../assets')))
