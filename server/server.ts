@@ -12,7 +12,7 @@ server.use('/api/v1/meme', memeRoutes)
 
 if (process.env.NODE_ENV === 'production') {
   server.use('/assets', express.static(path.resolve(__dirname, '../assets')))
-  server.get('/api/*', (req, res) => {
+  server.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../index.html'))
   })
 }
