@@ -62,20 +62,20 @@ export default function MemeListItem({ memeId, memeName, memeUrl }: Props) {
       <div>
         {updating ? (
           <form onSubmit={handleUpdateSubmit} aria-label="Update meme Form">
-            <label htmlFor="memeName">Rename: </label>
+            <label htmlFor="updateName">Rename: </label>
             <input
               type="text"
               name="memeName"
-              id="memeName"
+              id="updateName"
               value={rename}
               onChange={(e) => setRename(e.target.value)}
             />
 
-            <label htmlFor="memeUrl">Url: </label>
+            <label htmlFor="updateUrl">Url: </label>
             <input
               type="text"
               name="memeUrl"
-              id="memeUrl"
+              id="updateUrl"
               value={reUrl}
               onChange={(e) => setReUrl(e.target.value)}
             />
