@@ -35,8 +35,8 @@ body {
   flex-direction: column;
   align-items: center;
 }
-.recipe-list,
-.recipe-details {
+.meme-list,
+.meme-details {
   display: flex;
   flex-direction: column;
   align-items: center;
